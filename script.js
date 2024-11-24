@@ -74,20 +74,31 @@ particlesJS("particles", {
     retina_detect: true
 });
 
-function scrollToElement(elementSelector, instance = 0) {
-    const elements = document.querySelectorAll(elementSelector);
-    if (elements.length > instance) {
-        elements[instance].scrollIntoView({ behavior: 'smooth' });
-    }
+function scrollToElement(elementSelector) {
+    const element = document.querySelector(elementSelector);
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
 }
 
 const link1 = document.getElementById("link1");
 const link2 = document.getElementById("link2");
 
-link1.addEventListener('click', () => {
-    scrollToElement('.header');
+link1.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToElement('#projects');
 });
 
-link2.addEventListener('click', () => {
-    scrollToElement('footer');
+link2.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToElement('#contact');
+});
+
+link.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToElement('#about');
 });
